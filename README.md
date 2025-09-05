@@ -1,35 +1,3016 @@
-# Couoir FC
+<!DOCTYPE html>
+<html lang="fr">
 
-Couloir fc est un site web dedie aux passionnes de football. Ce site web presente les derniers actualites,les resultats des matchs et les informations sur les joueurs et les equipes.
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Couloir FC - Passion-Solidarité-Professionnalisme</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset et Base */
+        :root {
+            --primary-color: #0a0a1a;
+            --secondary-color: #12122e;
+            --accent-color: #1e3d8b;
+            --highlight-color: #ff4655;
+            --neon-effect: 0 0 10px rgba(255, 70, 85, 0.7), 0 0 20px rgba(255, 70, 85, 0.5);
+            --text-color: #ffffff;
+            --text-secondary: #b8b8b8;
+            --bg-color: #050510;
+            --card-bg: #161632;
+            --card-hover: #1e1e42;
+            --font-main: 'Poppins', 'Segoe UI', sans-serif;
+            --font-heading: 'Montserrat', 'Arial Black', sans-serif;
+        }
 
-## Fonctionnalites
+        @font-face {
+            font-family: 'Poppins';
+            src: url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        }
 
-- **Acceuil** : Page d'accueil du site web
-- **Equipe** : Information sur l'equipe et les joueurs
-- **Calendrier** : Calendrier des matchs et des evenements
-- **Actualites** : Actualites recentes sur l'equipe et les matchs
-- **Galerie** : Galerie de photo et de videos des matchs
-- **Classement** : Classement de l'equipe
-- **Boutique** : Vente en ligne de produits de l'equipes
-- **Contact** : Information de contact pour le club
+        @font-face {
+            font-family: 'Montserrat';
+            src: url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap');
+        }
 
-## Technologies utilisees
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-*HTML5
-*CSS3
-\*JavaScript
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(30, 61, 139, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, rgba(255, 70, 85, 0.15) 0%, transparent 20%);
+        }
 
-## Auteur
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-- Cyrille Bogico (Developpeur web)
-- ImaStudio (Concepteur et design)
+        section {
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
 
-## Licence
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: var(--font-heading);
+            font-weight: 800;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
 
-ce site web est sous licence
-[MIT](https://opensource.org/licence/MIT).
+        h1 {
+            font-size: 4.5rem;
+            background: linear-gradient(to right, #fff, #ff4655);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: var(--neon-effect);
+        }
 
-## Contact
+        h2 {
+            font-size: 3rem;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 50px;
+        }
 
-si vous avez des question ou des commentaires,n'hesitez pas a nous contacter a
-[info@couloirfc.com](mailto:info@culoir.com).
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 70px;
+            height: 5px;
+            background: var(--highlight-color);
+            box-shadow: var(--neon-effect);
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--text-color);
+            transition: all 0.4s ease;
+        }
+
+        a:hover {
+            color: var(--highlight-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background-color: var(--highlight-color);
+            color: var(--text-color);
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 5px 15px rgba(255, 70, 85, 0.4);
+            font-family: var(--font-heading);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 70, 85, 0.6);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        /* Navigation Futuriste */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 25px 0;
+            z-index: 1000;
+            background-color: rgba(10, 10, 26, 0.95);
+            backdrop-filter: blur(15px);
+            transition: all 0.5s cubic-bezier(0.215, 0.610, 0.355, 1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar.scrolled {
+            padding: 15px 0;
+            background-color: rgba(10, 10, 26, 0.98);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 60px;
+            transition: all 0.4s ease;
+            filter: drop-shadow(0 0 10px rgba(255, 70, 85, 0.7));
+        }
+
+        .logo-text {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            margin-left: 15px;
+            background: linear-gradient(to right, #fff, #ff4655);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: var(--neon-effect);
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-list li {
+            margin-left: 40px;
+            position: relative;
+        }
+
+        .nav-list a {
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 10px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .nav-list a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--highlight-color);
+            transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: var(--neon-effect);
+        }
+
+        .nav-list a:hover::after {
+            width: 100%;
+        }
+
+        .nav-list a span {
+            font-size: 0.7rem;
+            opacity: 0.7;
+            margin-top: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-list a:hover span {
+            opacity: 1;
+            color: var(--highlight-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+            position: relative;
+            width: 40px;
+            height: 30px;
+        }
+
+        .bar {
+            display: block;
+            width: 100%;
+            height: 4px;
+            margin: 6px auto;
+            background-color: var(--text-color);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 2px;
+        }
+
+        /* Hero Section Futuriste */
+        .hero {
+            height: 100vh;
+            min-height: 800px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10, 10, 26, 0.9) 0%, rgba(30, 61, 139, 0.7) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-player {
+            position: absolute;
+            right: 5%;
+            bottom: 0;
+            height: 90%;
+            z-index: 2;
+            animation: float 6s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(255, 70, 85, 0.5));
+        }
+
+        .hero-player img {
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .hero-bg-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(255, 70, 85, 0.1) 0%, transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(30, 61, 139, 0.1) 0%, transparent 25%);
+            z-index: 1;
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            filter: blur(30px);
+        }
+
+        /* Team Section Futuriste */
+        .team-section {
+            background-color: var(--primary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.imgur.com/JqYeZvn.png');
+            background-size: 40%;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .section-header h3 {
+            font-size: 2.5rem;
+            color: var(--highlight-color);
+            position: relative;
+            display: inline-block;
+            text-shadow: var(--neon-effect);
+        }
+
+        .section-header h3::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background-color: var(--highlight-color);
+            box-shadow: var(--neon-effect);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .player-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .player-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 70, 85, 0.1), transparent);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .player-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            background-color: var(--card-hover);
+        }
+
+        .player-card:hover::before {
+            opacity: 1;
+        }
+
+        .player-img {
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .player-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .player-card:hover .player-img img {
+            transform: scale(1.1);
+        }
+
+        .player-number {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--highlight-color);
+            color: var(--text-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 800;
+            box-shadow: var(--neon-effect);
+            z-index: 2;
+        }
+
+        .player-info {
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .player-info h4 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--highlight-color);
+        }
+
+        .player-info p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .player-position {
+            display: inline-block;
+            padding: 5px 15px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .substitutes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 80px;
+        }
+
+        .substitute {
+            background-color: var(--card-bg);
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .substitute::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+        }
+
+        .substitute:hover {
+            background-color: var(--highlight-color);
+            color: var(--text-color);
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(255, 70, 85, 0.4);
+        }
+
+        .substitute:hover::before {
+            left: 100%;
+        }
+
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .staff-card {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .staff-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .staff-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 5px solid var(--highlight-color);
+            box-shadow: var(--neon-effect);
+            transition: all 0.5s ease;
+        }
+
+        .staff-card:hover img {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 70, 85, 0.8);
+        }
+
+        .staff-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--highlight-color);
+        }
+
+        .staff-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        /* Schedule Section Futuriste */
+        .schedule-section {
+            background-color: var(--secondary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .schedule-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.imgur.com/JqYeZvn.png');
+            background-size: 40%;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        .schedule-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .match-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            display: flex;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .match-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 70, 85, 0.1), transparent);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .match-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .match-card:hover::before {
+            opacity: 1;
+        }
+
+        .match-date {
+            background: linear-gradient(135deg, var(--highlight-color), #d13354);
+            color: var(--text-color);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 120px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .match-date::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: rotate(45deg);
+            transition: all 0.8s ease;
+            z-index: -1;
+        }
+
+        .match-card:hover .match-date::before {
+            left: 100%;
+        }
+
+        .match-date .day {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1;
+            font-family: var(--font-heading);
+        }
+
+        .match-date .month {
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            margin: 10px 0;
+            font-family: var(--font-heading);
+            letter-spacing: 2px;
+        }
+
+        .match-date .year {
+            font-size: 1rem;
+            opacity: 0.9;
+            letter-spacing: 1px;
+        }
+
+        .match-info {
+            padding: 30px;
+            flex-grow: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .teams {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+
+        .team {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+
+        .team img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.3));
+            transition: all 0.5s ease;
+        }
+
+        .match-card:hover .team img {
+            filter: drop-shadow(0 0 15px rgba(255, 70, 85, 0.5));
+            transform: scale(1.1);
+        }
+
+        .team span {
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .vs {
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 0 30px;
+            color: var(--highlight-color);
+            text-shadow: var(--neon-effect);
+            font-family: var(--font-heading);
+        }
+
+        .match-details {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-secondary);
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .match-details p {
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+
+        .match-details i {
+            margin-right: 10px;
+            color: var(--highlight-color);
+            font-size: 1.3rem;
+        }
+
+        /* News Section Futuriste */
+        .news-section {
+            background-color: var(--primary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .news-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.imgur.com/JqYeZvn.png');
+            background-size: 40%;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 40px;
+        }
+
+        .news-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .news-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 70, 85, 0.1), transparent);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .news-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .news-card:hover::before {
+            opacity: 1;
+        }
+
+        .news-img {
+            height: 250px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .news-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .news-card:hover .news-img img {
+            transform: scale(1.1);
+        }
+
+        .date-tag {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--highlight-color), #d13354);
+            color: var(--text-color);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            line-height: 1;
+            box-shadow: var(--neon-effect);
+            z-index: 2;
+        }
+
+        .date-tag span:first-child {
+            font-size: 1.8rem;
+            font-weight: 800;
+            display: block;
+            font-family: var(--font-heading);
+        }
+
+        .date-tag span:last-child {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .news-content {
+            padding: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .news-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--highlight-color);
+        }
+
+        .news-content p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .read-more {
+            color: var(--highlight-color);
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            font-size: 1.1rem;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .read-more::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--highlight-color);
+            transition: width 0.4s ease;
+        }
+
+        .read-more:hover::after {
+            width: 100%;
+        }
+
+        .read-more i {
+            margin-left: 10px;
+            transition: transform 0.4s ease;
+        }
+
+        .read-more:hover i {
+            transform: translateX(10px);
+        }
+
+        /* Shop Section Futuriste */
+        .shop-section {
+            background-color: var(--secondary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shop-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.imgur.com/JqYeZvn.png');
+            background-size: 40%;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 70, 85, 0.1), transparent);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .product-img {
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .product-card:hover .product-img img {
+            transform: scale(1.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--highlight-color), #d13354);
+            color: var(--text-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            box-shadow: var(--neon-effect);
+            z-index: 2;
+        }
+
+        .product-info {
+            padding: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .product-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--highlight-color);
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--highlight-color);
+            margin-bottom: 20px;
+            font-family: var(--font-heading);
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-right: 15px;
+            font-weight: 600;
+        }
+
+        .add-to-cart {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--highlight-color), #d13354);
+            color: var(--text-color);
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: var(--font-heading);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 5px 15px rgba(255, 70, 85, 0.4);
+        }
+
+        .add-to-cart::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+
+        .add-to-cart:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 70, 85, 0.6);
+        }
+
+        .add-to-cart:hover::before {
+            left: 100%;
+        }
+
+        /* Contact Section Futuriste */
+        .contact-section {
+            background-color: var(--primary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.imgur.com/JqYeZvn.png');
+            background-size: 40%;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 60px;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 40px;
+            color: var(--highlight-color);
+            text-shadow: var(--neon-effect);
+        }
+
+        .contact-item {
+            display: flex;
+            margin-bottom: 30px;
+            align-items: flex-start;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            margin-right: 20px;
+            color: var(--highlight-color);
+            min-width: 30px;
+        }
+
+        .contact-item div p {
+            font-weight: 700;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .contact-item a,
+        .contact-item span {
+            display: block;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .contact-item a:hover {
+            color: var(--highlight-color);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            margin-top: 50px;
+        }
+
+        .social-links h3 {
+            margin-bottom: 20px;
+            color: var(--highlight-color);
+            text-shadow: var(--neon-effect);
+        }
+
+        .social-icons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--card-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 1.3rem;
+        }
+
+        .social-icon:hover {
+            background-color: var(--highlight-color);
+            transform: translateY(-10px) scale(1.1);
+            box-shadow: var(--neon-effect);
+        }
+
+        .contact-form h3 {
+            margin-bottom: 40px;
+            color: var(--highlight-color);
+            text-shadow: var(--neon-effect);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--highlight-color);
+            transition: width 0.4s ease;
+        }
+
+        .form-group:focus-within::after {
+            width: 100%;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 20px;
+            background-color: var(--card-bg);
+            border: none;
+            border-radius: 10px;
+            color: var(--text-color);
+            font-family: var(--font-main);
+            font-size: 1.1rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-bottom-color: var(--highlight-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 180px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--highlight-color), #d13354);
+            color: var(--text-color);
+            padding: 20px 40px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: var(--font-heading);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 10px 20px rgba(255, 70, 85, 0.4);
+            width: 100%;
+            font-size: 1.1rem;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 70, 85, 0.6);
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Footer Futuriste */
+        .footer {
+            background-color: var(--secondary-color);
+            padding: 80px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.imgur.com/JqYeZvn.png');
+            background-size: 40%;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-logo {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-logo img {
+            height: 80px;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 0 15px rgba(255, 70, 85, 0.7));
+        }
+
+        .footer-logo p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 300px;
+        }
+
+        .footer-links h3,
+        .footer-contact h3 {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+            color: var(--highlight-color);
+            text-shadow: var(--neon-effect);
+        }
+
+        .footer-links h3::after,
+        .footer-contact h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background-color: var(--highlight-color);
+            box-shadow: var(--neon-effect);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            display: inline-block;
+            position: relative;
+        }
+
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--highlight-color);
+            transition: width 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--highlight-color);
+            padding-left: 10px;
+        }
+
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .footer-contact i {
+            margin-right: 15px;
+            color: var(--highlight-color);
+            font-size: 1.3rem;
+            min-width: 25px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-bottom p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social a {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: var(--card-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 1.2rem;
+        }
+
+        .footer-social a:hover {
+            background-color: var(--highlight-color);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: var(--neon-effect);
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            background-color: var(--secondary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.imgur.com/JqYeZvn.png');
+            background-size: 40%;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 250px;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .gallery-item img,
+        .gallery-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .gallery-item:hover img,
+        .gallery-item:hover video {
+            transform: scale(1.1);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            opacity: 1;
+        }
+
+        /* Slideshow */
+        .slideshow-container {
+            max-width: 1000px;
+            position: relative;
+            margin: auto;
+            margin-top: 50px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mySlides {
+            display: none;
+        }
+
+        .mySlides img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+
+        .prev,
+        .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .prev:hover,
+        .next:hover {
+            background-color: var(--highlight-color);
+        }
+
+        .text {
+            color: white;
+            font-size: 1.2rem;
+            padding: 20px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+        }
+
+        .dot-container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: var(--card-bg);
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .active,
+        .dot:hover {
+            background-color: var(--highlight-color);
+        }
+
+        /* Ranking Section */
+        .ranking-section {
+            background-color: var(--primary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ranking-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.imgur.com/JqYeZvn.png');
+            background-size: 40%;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        .ranking-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .ranking-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 15px;
+            margin-top: 50px;
+        }
+
+        .ranking-table thead th {
+            background-color: var(--highlight-color);
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ranking-table thead th::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .ranking-table thead th:hover::after {
+            left: 100%;
+        }
+
+        .ranking-table tbody tr {
+            background-color: var(--card-bg);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .ranking-table tbody tr:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 70, 85, 0.3);
+            background-color: var(--card-hover);
+        }
+
+        .ranking-table td {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .ranking-table td:first-child {
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+
+        .ranking-table td:last-child {
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        .player-rank {
+            display: flex;
+            align-items: center;
+        }
+
+        .rank-number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            font-family: var(--font-heading);
+            color: var(--highlight-color);
+            margin-right: 20px;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .player-info-small {
+            display: flex;
+            align-items: center;
+        }
+
+        .player-info-small img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 2px solid var(--highlight-color);
+        }
+
+        .player-stats {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 0 10px;
+        }
+
+        .stat-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--highlight-color);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 70, 85, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(255, 70, 85, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 70, 85, 0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInFromLeft {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInFromRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Effets Spéciaux */
+        .floating-elements .floating-element:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: -150px;
+            left: -150px;
+            background: rgba(255, 70, 85, 0.1);
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .floating-elements .floating-element:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            bottom: -100px;
+            right: -100px;
+            background: rgba(30, 61, 139, 0.1);
+            animation: float 20s ease-in-out infinite reverse;
+        }
+
+        .floating-elements .floating-element:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            top: 30%;
+            right: 10%;
+            background: rgba(255, 70, 85, 0.1);
+            animation: float 12s ease-in-out infinite 2s;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+
+            h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero-player {
+                height: 80%;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .nav-list {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 400px;
+                height: 100vh;
+                background-color: var(--primary-color);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                z-index: 1000;
+                border-left: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-list.active {
+                right: 0;
+            }
+
+            .nav-list li {
+                margin: 20px 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .menu-toggle.active .bar:nth-child(1) {
+                transform: translateY(10px) rotate(45deg);
+            }
+
+            .menu-toggle.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.active .bar:nth-child(3) {
+                transform: translateY(-10px) rotate(-45deg);
+            }
+
+            .hero-content {
+                max-width: 100%;
+                text-align: center;
+            }
+
+            .hero-player {
+                display: none;
+            }
+
+            .team-grid,
+            .news-grid,
+            .shop-grid,
+            .gallery-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+
+            h2 {
+                font-size: 2.2rem;
+            }
+
+            section {
+                padding: 80px 0;
+            }
+
+            .match-card {
+                flex-direction: column;
+            }
+
+            .match-date {
+                flex-direction: row;
+                justify-content: center;
+                padding: 20px;
+                min-width: 100%;
+            }
+
+            .match-date .day,
+            .match-date .month,
+            .match-date .year {
+                margin: 0 15px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-social {
+                margin-top: 20px;
+            }
+
+            .ranking-table thead {
+                display: none;
+            }
+
+            .ranking-table,
+            .ranking-table tbody,
+            .ranking-table tr,
+            .ranking-table td {
+                display: block;
+                width: 100%;
+            }
+
+            .ranking-table tr {
+                margin-bottom: 30px;
+            }
+
+            .ranking-table td {
+                padding: 15px;
+                text-align: right;
+                position: relative;
+                padding-left: 50%;
+            }
+
+            .ranking-table td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 15px;
+                width: 45%;
+                padding-right: 15px;
+                font-weight: 700;
+                text-align: left;
+            }
+
+            .player-rank,
+            .player-info-small {
+                justify-content: flex-end;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 0.9rem;
+            }
+
+            .section-header h3 {
+                font-size: 1.8rem;
+            }
+
+            .team-grid,
+            .news-grid,
+            .shop-grid,
+            .gallery-container {
+                grid-template-columns: 1fr;
+            }
+
+            .player-card,
+            .news-card,
+            .product-card {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .mySlides img {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">
+                <img src="images/LOGO COULOIR FC.png" alt="Couloir FC Logo">
+                <span class="logo-text">COULOIR FC</span>
+            </a>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="nav-list">
+                <li><a href="#accueil">Accueil <span>Home</span></a></li>
+                <li><a href="#equipe">Équipe <span>Team</span></a></li>
+                <li><a href="#calendrier">Calendrier <span>Schedule</span></a></li>
+                <li><a href="#actualites">Actualités <span>News</span></a></li>
+                <li><a href="#boutique">Boutique <span>Shop</span></a></li>
+                <li><a href="#galerie">Galerie <span>Gallery</span></a></li>
+                <li><a href="#classement">Classement <span>Ranking</span></a></li>
+                <li><a href="#contact">Contact <span>Reach us</span></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="accueil">
+        <div class="hero-bg-pattern"></div>
+        <div class="floating-elements">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>COULOIR FC</h1>
+                <p>Une équipe de rêve, une passion sans limites.</p>
+                <a href="#equipe" class="btn">Découvrir l'équipe</a>
+            </div>
+            <div class="hero-player">
+                <img src="images/LOGO COULOIR FC.png" alt="Joueur de football">
+            </div>
+        </div>
+    </section>
+
+    <!-- Équipe Section -->
+    <section class="team-section" id="equipe">
+        <div class="container">
+            <h2>Notre Équipe</h2>
+            <div class="section-header">
+                <h3>Les Titulaires</h3>
+            </div>
+            <div class="team-grid">
+                <!-- Gardien -->
+                <div class="player-card">
+                    <div class="player-img">
+                        <img src="images/GARDIENS.jpg" alt="Michael">
+                        <div class="player-number">1</div>
+                    </div>
+                    <div class="player-info">
+                        <h4>Michael</h4>
+                        <p>Nationalité: Camerounaise</p>
+                        <p>Âge: 08 clean chips</p>
+                        <span class="player-position">Gardien</span>
+                    </div>
+                </div>
+
+                <!-- Défenseurs -->
+                <div class="player-card">
+                    <div class="player-img">
+                        <img src="images/ZEPEL.jpg" alt="Jospain">
+                        <div class="player-number">2</div>
+                    </div>
+                    <div class="player-info">
+                        <h4>Jospain</h4>
+                        <p>Nationalité: Camerounaise</p>
+                        <p>Meilleur lateral au Monde</p>
+                        <span class="player-position">Défenseur gauche</span>
+                    </div>
+                </div>
+
+                <div class="player-card">
+                    <div class="player-img">
+                        <img src="images/DEF.jpg" alt="Mayan">
+                        <div class="player-number">3</div>
+                    </div>
+                    <div class="player-info">
+                        <h4>Mayan</h4>
+                        <p>Nationalité: Camerounaise</p>
+                        <p>2buts</p>
+                        <span class="player-position">Défenseur central</span>
+                    </div>
+                </div>
+
+                <div class="player-card">
+                    <div class="player-img">
+                        <img src="https://i.imgur.com/Lk3VHdE.jpg" alt="Marco Polo">
+                        <div class="player-number">4</div>
+                    </div>
+                    <div class="player-info">
+                        <h4>Marco Polo</h4>
+                        <p>Nationalité: Camerounaise</p>
+                        <p>02 passes decisive</p>
+                        <span class="player-position">Défenseur central</span>
+                    </div>
+                </div>
+
+                <div class="player-card">
+                    <div class="player-img">
+                        <img src="images/GAMAEL.png" alt="Gamael">
+                        <div class="player-number">5</div>
+                    </div>
+                    <div class="player-info">
+                        <h4>Gamael</h4>
+                        <p>Nationalité: Camerounaise</p>
+                        <p>Meilleur jeune joueur</p>
+                        <span class="player-position">Défenseur droit</span>
+                    </div>
+                </div>
+
+                <!-- Milieux -->
+                <div class="player-card">
+                    <div class="player-img">
+                        <img src="images/ARMELO.jpg" alt="Armelo">
+                        <div class="player-number">6</div>
+                    </div>
+                    <div class="player-info">
+                        <h4>Armelo</h4>
+                        <p>Nationalité: Camerounaise</p>
+                        <p>03 passes decisive</p>
+                        <span class="player-position">Milieu défensif</span>
+                    </div>
+                </div>
+
+                <div class="player-card">
+                    <div class="player-img">
+                        <img src="images/ZEPEL.jpg" alt="D.Zepel">
+                        <div class="player-number">7</div>
+                    </div>
+                    <div class="player-info">
+                        <h4>D.Zepel</h4>
+                        <p>Nationalité: Camerounaise</p>
+                        <p>Meilleur joueur,M.passeur</p>
+                        <span class="player-position">Milieu offensif</span>
+                    </div>
+                </div>
+
+                <div class="player-card">
+                    <div class="player-img">
+                        <img src="images/BORIS.jpg" alt="Boris">
+                        <div class="player-number">9</div>
+                    </div>
+                    <div class="player-info">
+                        <h4>Boris</h4>
+                        <p>Nationalité: Camerounaise</p>
+                        <p>oo But</p>
+                        <span class="player-position">Milieu central</span>
+                    </div>
+                </div>
+
+                <!-- Attaquants -->
+                <div class="player-card">
+                    <div class="player-img">
+                        <img src="images/CYRILLE.jpg" alt="C.Bogico">
+                        <div class="player-number">10</div>
+                    </div>
+                    <div class="player-info">
+                        <h4>C.Bogico</h4>
+                        <p>Nationalité: Camerounaise</p>
+                        <p>01 But</p>
+                        <span class="player-position">Ailier gauche</span>
+                    </div>
+                </div>
+
+                <div class="player-card">
+                    <div class="player-img">
+                        <img src="images/KENZO.jpg" alt="Kenzo">
+                        <div class="player-number">11</div>
+                    </div>
+                    <div class="player-info">
+                        <h4>Kenzo</h4>
+                        <p>Nationalité: Camerounaise</p>
+                        <p>04 Buts</p>
+                        <span class="player-position">Avant-centre</span>
+                    </div>
+                </div>
+
+                <div class="player-card">
+                    <div class="player-img">
+                        <img src="https://i.imgur.com/JqYeZvn.png" alt="Yaya">
+                        <div class="player-number">12</div>
+                    </div>
+                    <div class="player-info">
+                        <h4>Yaya</h4>
+                        <p>Nationalité: Camerounaise</p>
+                        <p>02 Buts</p>
+                        <span class="player-position">Ailier droit</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-header">
+                <h3>Remplaçants</h3>
+            </div>
+            <div class="substitutes-grid">
+                <div class="substitute">Romuald</div>
+                <div class="substitute">Kameni</div>
+                <div class="substitute">Chrisno.watt</div>
+                <div class="substitute">Joël</div>
+                <div class="substitute">Brice</div>
+                <div class="substitute">La Sape</div>
+                <div class="substitute">Joinito</div>
+            </div>
+
+            <div class="section-header">
+                <h3>Staff Technique</h3>
+            </div>
+            <div class="staff-grid">
+                <div class="staff-card">
+                    <img src="https://i.imgur.com/JqYeZvn.png" alt="Jean Pierre">
+                    <h4>Jean Pierre</h4>
+                    <p>Coach Principal</p>
+                </div>
+                <div class="staff-card">
+                    <img src="images/ENS1.jpg" alt="Marco.P">
+                    <h4>Marco.P</h4>
+                    <p>Coach Adjoint</p>
+                </div>
+                <div class="staff-card">
+                    <img src="images/valere.jpg" alt="Valérie.D">
+                    <h4>Valérie.D</h4>
+                    <p>Cameraman</p>
+                </div>
+                <div class="staff-card">
+                    <img src="images/ARMELO.jpg" alt="Armelo">
+                    <h4>Armelo</h4>
+                    <p>Staff Médical</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calendrier Section -->
+    <section class="schedule-section" id="calendrier">
+        <div class="container">
+            <h2>Calendrier des Matchs</h2>
+            <div class="schedule-container">
+                <div class="match-card">
+                    <div class="match-date">
+                        <span class="day">25</span>
+                        <span class="month">Août</span>
+                        <span class="year">2025</span>
+                    </div>
+                    <div class="match-info">
+                        <div class="teams">
+                            <div class="team">
+                                <img src="images/LOGO COULOIR FC.png" alt="Couloir FC">
+                                <span>Couloir FC</span>
+                            </div>
+                            <div class="vs">VS</div>
+                            <div class="team">
+                                <img src="https://i.imgur.com/JqYeZvn.png" alt="Équipe A">
+                                <span>Équipe A</span>
+                            </div>
+                        </div>
+                        <div class="match-details">
+                            <p><i class="fas fa-map-marker-alt"></i> Stade Camtel de Bepanda, Douala</p>
+                            <p><i class="far fa-clock"></i> 15:00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="match-card">
+                    <div class="match-date">
+                        <span class="day">02</span>
+                        <span class="month">Sept</span>
+                        <span class="year">2025</span>
+                    </div>
+                    <div class="match-info">
+                        <div class="teams">
+                            <div class="team">
+                                <img src="images/LOGO COULOIR FC.png" alt="Couloir FC">
+                                <span>Couloir FC</span>
+                            </div>
+                            <div class="vs">VS</div>
+                            <div class="team">
+                                <img src="https://i.imgur.com/JqYeZvn.png" alt="Équipe B">
+                                <span>Équipe B</span>
+                            </div>
+                        </div>
+                        <div class="match-details">
+                            <p><i class="fas fa-map-marker-alt"></i> Stade du Centre d`Accueil, Douala</p>
+                            <p><i class="far fa-clock"></i> 15:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Actualités Section -->
+    <section class="news-section" id="actualites">
+        <div class="container">
+            <h2>Dernières Actualités</h2>
+            <div class="news-grid">
+                <article class="news-card">
+                    <div class="news-img">
+                        <img src="https://i.imgur.com/JqYeZvn.png" alt="Kameni">
+                        <div class="date-tag">
+                            <span>18</span>
+                            <span>Août</span>
+                        </div>
+                    </div>
+                    <div class="news-content">
+                        <h3>Kameni, la nouvelle pépite du Real Madrid</h3>
+                        <p>L'ancien espoir du Real Madrid CF, Kameni (13 ans), a signé en contrat libre avec le Couloir
+                            FC. Lors de son premier match, il a marqué un but spectaculaire et réalisé des dribbles
+                            magnifiques accompagnés de passes de génie qui ont ébloui le public.</p>
+                        <a href="#" class="read-more">Lire plus <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <article class="news-card">
+                    <div class="news-img">
+                        <img src="images/ENSPRO.jpg" alt="Match de Gala">
+                        <div class="date-tag">
+                            <span>10</span>
+                            <span>Août</span>
+                        </div>
+                    </div>
+                    <div class="news-content">
+                        <h3>Succès du match de gala Kenzo et Franck.Vini</h3>
+                        <p>Le match de gala organisé en l'honneur de Kenzo et Franck.Vini a été un véritable succès. Les
+                            Vétérans ont affronté les Jeunes du Couloir FC dans une rencontre palpitante où D.Zepel a
+                            brillé avec des performances exceptionnelles et a même délivré une passe décisive à
+                            l'attaquant C.Bogico.</p>
+                        <a href="#" class="read-more">Lire plus <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <article class="news-card">
+                    <div class="news-img">
+                        <img src="images/footA.jpg" alt="Adidas">
+                        <div class="date-tag">
+                            <span>10</span>
+                            <span>Août</span>
+                        </div>
+                    </div>
+                    <div class="news-content">
+                        <h3>Cyrille Bogico</h3>
+                        <p> le numéro 10 de Couloir FC, est malade et incertain pour les prochains matchs
+                            Selon les dernières informations, Cyrille Bogico a reçu des injections un peu partout sur le corps pour accélérer son traitement et espérer un prompt rétablissement.
+                            Nous sommes confiants qu'il reviendra plus fort que jamais et qu'il continuera à nous faire vibrer avec son talent et sa détermination.</p>
+                        <a href="#" class="read-more">Lire plus <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <article class="news-card">
+                    <div class="news-img">
+                        <img src="images/Armelo.jpg" alt="Armelo">
+                        <div class="date-tag">
+                            <span>10</span>
+                            <span>Août</span>
+                        </div>
+                    </div>
+                    <div class="news-content">
+                        <h3>Armelo entre en jeu et change la donne</h3>
+                        <p>À la 52ème minute du match de gala, Armelo est entré en jeu avec les Vétérans. Le milieu de
+                            terrain a temporisé le jeu et tenté de mener son équipe vers la victoire face à cette grande
+                            équipe de jeunes talentueux et professionnels.</p>
+                        <a href="#" class="read-more">Lire plus <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Boutique Section -->
+    <section class="shop-section" id="boutique">
+        <div class="container">
+            <h2>Boutique Officielle</h2>
+            <div class="shop-grid">
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="images/maillott.jpg" alt="Maillot domicile">
+                        <div class="product-badge">Nouveau</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Maillot Domicile 2025</h3>
+                        <p class="price">12 000 FCFA</p>
+                        <button class="add-to-cart">Ajouter au panier</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="images/maillot.jpg" alt="Maillot extérieur">
+                    </div>
+                    <div class="product-info">
+                        <h3>Maillot Extérieur 2025</h3>
+                        <p class="price">12 000 FCFA</p>
+                        <button class="add-to-cart">Ajouter au panier</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="images/plout.jpg" alt="Plot">
+                    </div>
+                    <div class="product-info">
+                        <h3>Plot</h3>
+                        <p class="price">5 000 FCFA</p>
+                        <button class="add-to-cart">Ajouter au panier</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="images/ballonn.jpg" alt="Ballon">
+                        <div class="product-badge">Promo</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Ballon</h3>
+                        <p class="price"><span class="old-price">15 000 FCFA</span> 8 000 FCFA</p>
+                        <button class="add-to-cart">Ajouter au panier</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galerie Section -->
+    <section class="gallery-section" id="galerie">
+        <div class="container">
+            <h2>Galerie Multimédia</h2>
+
+            <!-- Slideshow -->
+            <div class="slideshow-container">
+                <div class="mySlides fade">
+                    <img src="images/ENSPRO.jpg" alt="Équipe Couloir FC">
+                    <div class="text">L'équipe au complet lors du dernier match</div>
+                </div>
+
+                <div class="mySlides fade">
+                    <img src="videos/cyrilleVID.mp4" alt="Entraînement">
+                    <div class="text">Séance d'entraînement intensive</div>
+                </div>
+
+                <div class="mySlides fade">
+                    <img src="https://i.imgur.com/JqYeZvn.png" alt="Kameni">
+                    <div class="text">Kameni, notre nouvelle recrue du Real Madrid</div>
+                </div>
+
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            </div>
+
+            <div class="dot-container">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="gallery-container">
+                <div class="gallery-item">
+                    <img src="videos/VideoCook_20250517_064501693.mp4" alt="Match 1">
+                    <div class="gallery-caption">Victoire contre l'Équipe A</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="videos/VideoPro.mp4" alt="Match 2">
+                    <div class="gallery-caption">Célébration après le but de Kenzo</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.imgur.com/JqYeZvn.png" alt="Entraînement 1">
+                    <div class="gallery-caption">Séance d'entraînement matinale</div>
+                </div>
+                <div class="gallery-item">
+                    <video controls>
+                        <source src="https://example.com/video1.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas les vidéos.
+                    </video>
+                    <div class="gallery-caption">Meilleurs moments du dernier match</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.imgur.com/JqYeZvn.png" alt="Kameni">
+                    <div class="gallery-caption">Kameni en action</div>
+                </div>
+                <div class="gallery-item">
+                    <video controls>
+                        <source src="https://example.com/video2.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas les vidéos.
+                    </video>
+                    <div class="gallery-caption">Interview exclusive de l'entraîneur</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Classement Section -->
+    <section class="ranking-section" id="classement">
+        <div class="container">
+            <h2>Classement des XI Entrants</h2>
+            <div class="ranking-container">
+                <table class="ranking-table">
+                    <thead>
+                        <tr>
+                            <th>Position</th>
+                            <th>Joueur</th>
+                            <th>Buts</th>
+                            <th>Passes</th>
+                            <th>Note</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Position">
+                                <div class="player-rank">
+                                    <span class="rank-number">1</span>
+                                </div>
+                            </td>
+                            <td data-label="Joueur">
+                                <div class="player-info-small">
+                                    <img src="images/KENZO.jpg" alt="Kenzo">
+                                    <div>
+                                        <h4>Kenzo</h4>
+                                        <p>Attaquant</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td data-label="Buts">
+                                <div class="player-stats">
+                                    <div class="stat">
+                                        <div class="stat-value">12</div>
+                                        <div class="stat-label">Buts</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td data-label="Passes">
+                                <div class="player-stats">
+                                    <div class="stat">
+                                        <div class="stat-value">8</div>
+                                        <div class="stat-label">Passes</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td data-label="Note">
+                                <div class="player-stats">
+                                    <div class="stat">
+                                        <div class="stat-value">9.2</div>
+                                        <div class="stat-label">/10</div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="Position">
+                                <div class="player-rank">
+                                    <span class="rank-number">2</span>
+                                </div>
+                            </td>
+                            <td data-label="Joueur">
+                                <div class="player-info-small">
+                                    <img src="images/cyrille.jpg" alt="C.Bogico">
+                                    <div>
+                                        <h4>C.Bogico</h4>
+                                        <p>Ailier gauche</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td data-label="Buts">
+                                <div class="player-stats">
+                                    <div class="stat">
+                                        <div class="stat-value">7</div>
+                                        <div class="stat-label">Buts</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td data-label="Passes">
+                                <div class="player-stats">
+                                    <div class="stat">
+                                        <div class="stat-value">10</div>
+                                        <div class="stat-label">Passes</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td data-label="Note">
+                                <div class="player-stats">
+                                    <div class="stat">
+                                        <div class="stat-value">8.7</div>
+                                        <div class="stat-label">/10</div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="Position">
+                                <div class="player-rank">
+                                    <span class="rank-number">3</span>
+                                </div>
+                            </td>
+                            <td data-label="Joueur">
+                                <div class="player-info-small">
+                                    <img src="images/ZEPEL.jpg" alt="D.Zepel">
+                                    <div>
+                                        <h4>D.Zepel</h4>
+                                        <p>Milieu offensif</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td data-label="Buts">
+                                <div class="player-stats">
+                                    <div class="stat">
+                                        <div class="stat-value">5</div>
+                                        <div class="stat-label">Buts</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td data-label="Passes">
+                                <div class="player-stats">
+                                    <div class="stat">
+                                        <div class="stat-value">12</div>
+                                        <div class="stat-label">Passes</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td data-label="Note">
+                                <div class="player-stats">
+                                    <div class="stat">
+                                        <div class="stat-value">8.5</div>
+                                        <div class="stat-label">/10</div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="Position">
+                                <div class="player-rank">
+                                    <span class="rank-number">4</span>
+                                </div>
+                            </td>
+                            <td data-label="Joueur">
+                                <div class="player-info-small">
+                                    <img src="https://i.imgur.com/JqYeZvn.png" alt="Kameni">
+                                    <div>
+                                        <h4>Kameni</h4>
+                                        <p>Milieu</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td data-label="Buts">
+                                <div class="player-stats">
+                                    <div class="stat">
+                                        <div class="stat-value">3</div>
+                                        <div class="stat-label">Buts</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td data-label="Passes">
+                                <div class="player-stats">
+                                    <div class="stat">
+                                        <div class="stat-value">6</div>
+                                        <div class="stat-label">Passes</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td data-label="Note">
+                                <div class="player-stats">
+                                    <div class="stat">
+                                        <div class="stat-value">8.1</div>
+                                        <div class="stat-label">/10</div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="Position">
+                                <div class="player-rank">
+                                    <span class="rank-number">5</span>
+                                </div>
+                            </td>
+                            <td data-label="Joueur">
+                                <div class="player-info-small">
+                                    <img src="images/BORIS.jpg" alt="Boris">
+                                    <div>
+                                        <h4>Boris</h4>
+                                        <p>Milieu central</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td data-label="Buts">
+                                <div class="player-stats">
+                                    <div class="stat">
+                                        <div class="stat-value">2</div>
+                                        <div class="stat-label">Buts</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td data-label="Passes">
+                                <div class="player-stats">
+                                    <div class="stat">
+                                        <div class="stat-value">7</div>
+                                        <div class="stat-label">Passes</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td data-label="Note">
+                                <div class="player-stats">
+                                    <div class="stat">
+                                        <div class="stat-value">7.9</div>
+                                        <div class="stat-label">/10</div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2>Contactez-nous</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Informations de contact</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <p>Téléphone:</p>
+                            <a href="tel:+237658686039">+237 658 68 60 39</a>
+                            <a href="tel:+237692252587">+237 692 25 25 87</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <p>Email:</p>
+                            <a href="mailto:couloirfc@gmail.com">couloirfc@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <p>Adresse:</p>
+                            <span>Douala, Cameroun quartier Maturite</span>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <h3>Suivez-nous</h3>
+                        <div class="social-icons">
+                            <a href="https://facebook.com/couloirfc" class="social-icon"><i
+                                    class="fab fa-facebook-f"></i></a>
+                            <a href="https://twitter.com/couloirfc" class="social-icon"><i
+                                    class="fab fa-twitter"></i></a>
+                            <a href="https://instagram.com/couloirfc" class="social-icon"><i
+                                    class="fab fa-instagram"></i></a>
+                            <a href="https://youtube.com/couloirfc" class="social-icon"><i
+                                    class="fab fa-youtube"></i></a>
+                            <a href="https://tiktok.com/@couloirfc" class="social-icon"><i
+                                    class="fab fa-tiktok"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Envoyez-nous un message</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="name" placeholder="Votre nom" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" placeholder="Votre email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="subject" placeholder="Sujet" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" rows="5" placeholder="Votre message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Envoyer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/LOGO COULOIR FC.png" alt="Couloir FC Logo">
+                    <p>Passion • Professionnalisme • Performance</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Liens rapides</h3>
+                    <ul>
+                        <li><a href="#accueil">Accueil</a></li>
+                        <li><a href="#equipe">Équipe</a></li>
+                        <li><a href="#calendrier">Calendrier</a></li>
+                        <li><a href="#actualites">Actualités</a></li>
+                        <li><a href="#boutique">Boutique</a></li>
+                        <li><a href="#galerie">Galerie</a></li>
+                        <li><a href="#classement">Classement</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-phone"></i> +237 658 68 60 39</p>
+                    <p><i class="fas fa-phone"></i> +237 692 25 25 87</p>
+                    <p><i class="fas fa-envelope"></i> couloirfc@gmail.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Douala, Cameroun</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Couloir FC. Tous droits réservés.</p>
+                <p><a href="conditions-d-utilisation.html">Condition d'utilisation</a> | <a
+                        href="politique-de-confidentialite.html">Politique de confidentialite</a></p>
+                <p>Design et logo par
+                    <a href="https:www.imastudio225.com">
+                        <img src="images/Studio pro.png" alt="ImaStudio"></a>
+                </p>
+                <p>Developpement web par
+                    <a href="https:www.imastudio225.com">
+                        <img src="images/shoot.png" alt="Cyrille Bogico - ImaStudio"></a>
+                </p>
+                <div class="footer-social">
+                    <a href="https://facebook.com/couloirfc"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/couloirfc"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com/couloirfc"><i class="fab fa-instagram"></i></a>
+                    <a href="https://tiktok.com/@couloirfc"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://youtube.com/couloirfc"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu mobile
+        const menuToggle = document.getElementById('mobile-menu');
+        const navList = document.querySelector('.nav-list');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navList.classList.toggle('active');
+        });
+
+        // Fermer le menu lorsqu'un lien est cliqué
+        document.querySelectorAll('.nav-list a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navList.classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Animation au scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.team-grid .player-card, .news-card, .product-card, .gallery-item');
+
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+
+        // Initialiser les éléments avec une opacité 0
+        document.querySelectorAll('.team-grid .player-card, .news-card, .product-card, .gallery-item').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'all 0.5s ease';
+        });
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+
+        // Formulaire de contact
+        const contactForm = document.getElementById('contactForm');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Récupérer les valeurs du formulaire
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+
+            // Ici, vous pourriez envoyer les données à un serveur
+            console.log({ name, email, subject, message });
+
+            // Afficher un message de succès
+            alert('Merci pour votre message! Nous vous contacterons bientôt.');
+
+            // Réinitialiser le formulaire
+            contactForm.reset();
+        });
+
+        // Smooth scrolling pour les ancres
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Slideshow
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+        }
+
+        // Auto slide change
+        setInterval(() => {
+            plusSlides(1);
+        }, 5000);
+
+        // Animation for ranking table
+        const rows = document.querySelectorAll('.ranking-table tbody tr');
+        rows.forEach((row, index) => {
+            row.style.animationDelay = `${index * 0.1}s`;
+            row.classList.add('animate-row');
+        });
+    </script>
+</body>
+
+</html>
